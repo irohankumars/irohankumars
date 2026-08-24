@@ -1,0 +1,46 @@
+name: Refresh profile graphics
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "23 3 * * *"
+permissions:
+  contents: write
+concurrency:
+  group: profile-graphics
+  cancel-in-progress: true
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out profile repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Cache background-removal model
+        uses: actions/cache@v4
+        with:
+          path: ~/.u2net
+          key: rembg-u2net-v1
+      - name: Install generator dependencies
+        run: python -m pip install --disable-pip-version-check -r requirements.txt
+      - name: Generate portrait and GitHub activity
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python scripts/portrait.py
+          python scripts/stats.py --username "${{ github.repository_owner }}"
+      - name: Commit changed graphics
+        shell: bash
+        run: |
+          if git diff --quiet -- generated; then
+            echo "Generated graphics are unchanged."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add generated
+          git commit -m "chore: refresh profile graphics"
+          git push

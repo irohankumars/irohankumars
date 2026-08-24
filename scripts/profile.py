@@ -6,23 +6,15 @@ import base64
 from pathlib import Path
 
 from PIL import Image
-from rembg import remove
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "assets" / "profile.jpeg"
 TRANSPARENT = ROOT / "generated" / "profile-transparent.png"
 REVEAL = ROOT / "generated" / "profile-reveal.svg"
-TAGS = (
-    "SOFTWARE ENGINEER",
-    "FULL-STACK DEVELOPER",
-    "PRODUCT BUILDER",
-    "SECURITY ENTHUSIAST",
-    "FOUNDER",
-)
-
-
 def remove_photo_background(source: Path, output: Path) -> Image.Image:
     """Remove only the background; retain the source dimensions and foreground pixels."""
+    from rembg import remove
+
     original = Image.open(source).convert("RGBA")
     result = remove(
         original,
@@ -38,19 +30,14 @@ def remove_photo_background(source: Path, output: Path) -> Image.Image:
 
 def reveal_svg(photo: Image.Image, png_path: Path) -> str:
     width, height = photo.size
-    tag_space = max(120, round(height * 0.10))
-    tag_y = height + round(tag_space * 0.56)
-    total_height = height + tag_space
     reveal_seconds = 3.4
-    first_tag = 4.2
-    tag_duration = 15
     encoded = base64.b64encode(png_path.read_bytes()).decode("ascii")
     lines = [
         '<?xml version="1.0" encoding="UTF-8"?>',
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" '
-        f'viewBox="0 0 {width} {total_height}" role="img" aria-labelledby="title desc">',
+        f'viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
         '<title id="title">Rohan Kumar</title>',
-        '<desc id="desc">Profile photograph with a gently rotating professional role label.</desc>',
+        '<desc id="desc">Profile photograph with a gentle top-to-bottom reveal.</desc>',
         '<defs>',
         '<clipPath id="photo-reveal">',
         f'<rect x="0" y="0" width="{width}" height="0">',
@@ -63,17 +50,6 @@ def reveal_svg(photo: Image.Image, png_path: Path) -> str:
         f'preserveAspectRatio="xMidYMid meet" clip-path="url(#photo-reveal)" '
         f'href="data:image/png;base64,{encoded}"/>',
     ]
-    for index, tag in enumerate(TAGS):
-        begin = first_tag + index * 3
-        lines.extend([
-            f'<text x="{width / 2:.1f}" y="{tag_y}" text-anchor="middle" opacity="0" '
-            'fill="#303030" font-family="JetBrains Mono,DejaVu Sans Mono,Consolas,monospace" '
-            f'font-size="{max(20, round(width * 0.025))}" letter-spacing="2.2">{tag}',
-            '<animate attributeName="opacity" values="0;1;1;0;0" '
-            f'keyTimes="0;0.08;0.16;0.20;1" begin="{begin:.1f}s" dur="{tag_duration}s" '
-            'repeatCount="indefinite"/>',
-            '</text>',
-        ])
     lines.append('</svg>')
     return "\n".join(lines) + "\n"
 
@@ -83,9 +59,10 @@ def main() -> None:
     parser.add_argument("--input", type=Path, default=SOURCE)
     parser.add_argument("--png", type=Path, default=TRANSPARENT)
     parser.add_argument("--svg", type=Path, default=REVEAL)
+    parser.add_argument("--reuse-png", action="store_true", help="Rebuild the reveal SVG without rerunning background removal")
     args = parser.parse_args()
-    photo = remove_photo_background(args.input, args.png)
-    args.svg.write_text(reveal_svg(photo, args.png), encoding="utf-8")
+    photo = Image.open(args.png).convert("RGBA") if args.reuse_png else remove_photo_background(args.input, args.png)
+    args.svg.write_bytes(reveal_svg(photo, args.png).encode("utf-8"))
     print(f"Wrote {args.png} and {args.svg} ({photo.width} x {photo.height})")
 
 

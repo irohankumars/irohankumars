@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 92" role="img" aria-labelledby="tag-title tag-desc">
+<title id="tag-title">Rohan Kumar — software engineer and product builder</title>
+<desc id="tag-desc">A large green typewriter animation cycles through professional roles.</desc>
+<defs>
+<clipPath id="tag-0"><rect x="158.7" y="0" width="0" height="92">
+<animate attributeName="width" values="0.0;26.0;52.1;78.1;104.2;130.2;156.2;182.3;208.3;234.4;260.4;286.4;312.5;338.5;364.6;390.6;416.6;442.7;442.7;416.6;390.6;364.6;338.5;312.5;286.4;260.4;234.4;208.3;182.3;156.2;130.2;104.2;78.1;52.1;26.0;0.0;0.0" keyTimes="0.00000;0.00662;0.01324;0.01985;0.02647;0.03309;0.03971;0.04632;0.05294;0.05956;0.06618;0.07279;0.07941;0.08603;0.09265;0.09926;0.10588;0.11250;0.18750;0.19044;0.19338;0.19632;0.19926;0.20221;0.20515;0.20809;0.21103;0.21397;0.21691;0.21985;0.22279;0.22574;0.22868;0.23162;0.23456;0.23750;1.00000" dur="12.0s" calcMode="discrete" repeatCount="indefinite"/>
+</rect></clipPath>
+<clipPath id="tag-1"><rect x="119.6" y="0" width="0" height="92">
+<animate attributeName="width" values="0.0;0.0;26.0;52.1;78.1;104.2;130.2;156.2;182.3;208.3;234.4;260.4;286.4;312.5;338.5;364.6;390.6;416.6;442.7;468.7;494.8;520.8;520.8;494.8;468.7;442.7;416.6;390.6;364.6;338.5;312.5;286.4;260.4;234.4;208.3;182.3;156.2;130.2;104.2;78.1;52.1;26.0;0.0;0.0" keyTimes="0.00000;0.25000;0.25562;0.26125;0.26688;0.27250;0.27813;0.28375;0.28937;0.29500;0.30062;0.30625;0.31187;0.31750;0.32312;0.32875;0.33437;0.34000;0.34563;0.35125;0.35687;0.36250;0.43750;0.44000;0.44250;0.44500;0.44750;0.45000;0.45250;0.45500;0.45750;0.46000;0.46250;0.46500;0.46750;0.47000;0.47250;0.47500;0.47750;0.48000;0.48250;0.48500;0.48750;1.00000" dur="12.0s" calcMode="discrete" repeatCount="indefinite"/>
+</rect></clipPath>
+<clipPath id="tag-2"><rect x="184.7" y="0" width="0" height="92">
+<animate attributeName="width" values="0.0;0.0;26.0;52.1;78.1;104.2;130.2;156.2;182.3;208.3;234.4;260.4;286.4;312.5;338.5;364.6;390.6;390.6;364.6;338.5;312.5;286.4;260.4;234.4;208.3;182.3;156.2;130.2;104.2;78.1;52.1;26.0;0.0;0.0" keyTimes="0.00000;0.50000;0.50750;0.51500;0.52250;0.53000;0.53750;0.54500;0.55250;0.56000;0.56750;0.57500;0.58250;0.59000;0.59750;0.60500;0.61250;0.68750;0.69083;0.69417;0.69750;0.70083;0.70417;0.70750;0.71083;0.71417;0.71750;0.72083;0.72417;0.72750;0.73083;0.73417;0.73750;1.00000" dur="12.0s" calcMode="discrete" repeatCount="indefinite"/>
+</rect></clipPath>
+<clipPath id="tag-3"><rect x="132.6" y="0" width="0" height="92">
+<animate attributeName="width" values="0.0;0.0;26.0;52.1;78.1;104.2;130.2;156.2;182.3;208.3;234.4;260.4;286.4;312.5;338.5;364.6;390.6;416.6;442.7;468.7;494.8;494.8;468.7;442.7;416.6;390.6;364.6;338.5;312.5;286.4;260.4;234.4;208.3;182.3;156.2;130.2;104.2;78.1;52.1;26.0;0.0;0.0" keyTimes="0.00000;0.75000;0.75592;0.76184;0.76776;0.77368;0.77961;0.78553;0.79145;0.79737;0.80329;0.80921;0.81513;0.82105;0.82697;0.83289;0.83882;0.84474;0.85066;0.85658;0.86250;0.93750;0.94013;0.94276;0.94539;0.94803;0.95066;0.95329;0.95592;0.95855;0.96118;0.96382;0.96645;0.96908;0.97171;0.97434;0.97697;0.97961;0.98224;0.98487;0.98750;1.00000" dur="12.0s" calcMode="discrete" repeatCount="indefinite"/>
+</rect></clipPath>
+</defs>
+<text x="158.7" y="60" clip-path="url(#tag-0)" fill="#39d353" font-family="JetBrains Mono,DejaVu Sans Mono,Consolas,monospace" font-size="42" font-weight="600" letter-spacing="1.2">SOFTWARE ENGINEER</text>
+<text x="119.6" y="60" clip-path="url(#tag-1)" fill="#39d353" font-family="JetBrains Mono,DejaVu Sans Mono,Consolas,monospace" font-size="42" font-weight="600" letter-spacing="1.2">FULL-STACK DEVELOPER</text>
+<text x="184.7" y="60" clip-path="url(#tag-2)" fill="#39d353" font-family="JetBrains Mono,DejaVu Sans Mono,Consolas,monospace" font-size="42" font-weight="600" letter-spacing="1.2">PRODUCT BUILDER</text>
+<text x="132.6" y="60" clip-path="url(#tag-3)" fill="#39d353" font-family="JetBrains Mono,DejaVu Sans Mono,Consolas,monospace" font-size="42" font-weight="600" letter-spacing="1.2">SECURITY ENTHUSIAST</text>
+</svg>

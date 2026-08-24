@@ -31,6 +31,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           python scripts/profile.py
+          python scripts/tag.py
           python scripts/stats.py --username "${{ github.repository_owner }}"
       - name: Commit changed graphics
         shell: bash

@@ -4,7 +4,9 @@
   <img src="generated/profile-reveal.svg" width="420" alt="Rohan Kumar — software engineer" />
 </p>
 
-<br />
+<p align="center">
+  <img src="generated/profile-tag.svg" width="680" alt="Software engineer · Full-stack developer · Product builder · Security enthusiast" />
+</p>
 
 I take software from a rough idea to something people can actually use—designed, built, secured, and deployed.
 

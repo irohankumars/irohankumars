@@ -1,6 +1,22 @@
-<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-label="LANGUAGES" viewBox="0 0 760 180">
+<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-label="REPOSITORY LANGUAGE MIX" viewBox="0 0 760 210">
 <rect width="100%" height="100%" fill="#fff"/>
-<text x="24" y="31" fill="#6b6b6b" font-family="Consolas,DejaVu Sans Mono,monospace" font-size="12" letter-spacing="1.4">LANGUAGES</text>
-<text x="24" y="82" fill="#161616" text-anchor="start" font-family="Consolas,DejaVu Sans Mono,monospace" font-size="16">activity will appear after the first workflow run</text>
-<text x="24" y="112" fill="#6b6b6b" text-anchor="start" font-family="Consolas,DejaVu Sans Mono,monospace" font-size="12">run locally with GITHUB_TOKEN to populate</text>
+<text x="24" y="31" fill="#6b6b6b" font-family="Consolas,DejaVu Sans Mono,monospace" font-size="12" letter-spacing="1.4">REPOSITORY LANGUAGE MIX</text>
+<text x="24" y="67" fill="#161616" text-anchor="start" font-family="Consolas,DejaVu Sans Mono,monospace" font-size="13">TypeScript</text>
+<text x="190" y="67" fill="#6b6b6b" text-anchor="end" font-family="Consolas,DejaVu Sans Mono,monospace" font-size="12">39.9%</text>
+<rect x="215" y="57" width="200" height="7" fill="#202020"/>
+<text x="24" y="87" fill="#161616" text-anchor="start" font-family="Consolas,DejaVu Sans Mono,monospace" font-size="13">JavaScript</text>
+<text x="190" y="87" fill="#6b6b6b" text-anchor="end" font-family="Consolas,DejaVu Sans Mono,monospace" font-size="12">39.6%</text>
+<rect x="215" y="77" width="198" height="7" fill="#202020"/>
+<text x="24" y="107" fill="#161616" text-anchor="start" font-family="Consolas,DejaVu Sans Mono,monospace" font-size="13">EJS</text>
+<text x="190" y="107" fill="#6b6b6b" text-anchor="end" font-family="Consolas,DejaVu Sans Mono,monospace" font-size="12"> 7.3%</text>
+<rect x="215" y="97" width="36" height="7" fill="#202020"/>
+<text x="24" y="127" fill="#161616" text-anchor="start" font-family="Consolas,DejaVu Sans Mono,monospace" font-size="13">CSS</text>
+<text x="190" y="127" fill="#6b6b6b" text-anchor="end" font-family="Consolas,DejaVu Sans Mono,monospace" font-size="12"> 6.7%</text>
+<rect x="215" y="117" width="33" height="7" fill="#202020"/>
+<text x="24" y="147" fill="#161616" text-anchor="start" font-family="Consolas,DejaVu Sans Mono,monospace" font-size="13">Java</text>
+<text x="190" y="147" fill="#6b6b6b" text-anchor="end" font-family="Consolas,DejaVu Sans Mono,monospace" font-size="12"> 4.8%</text>
+<rect x="215" y="137" width="24" height="7" fill="#202020"/>
+<text x="24" y="167" fill="#161616" text-anchor="start" font-family="Consolas,DejaVu Sans Mono,monospace" font-size="13">Python</text>
+<text x="190" y="167" fill="#6b6b6b" text-anchor="end" font-family="Consolas,DejaVu Sans Mono,monospace" font-size="12"> 1.3%</text>
+<rect x="215" y="157" width="7" height="7" fill="#202020"/>
 </svg>

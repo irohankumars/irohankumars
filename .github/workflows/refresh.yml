@@ -30,7 +30,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          python scripts/portrait.py
+          python scripts/profile.py
           python scripts/stats.py --username "${{ github.repository_owner }}"
       - name: Commit changed graphics
         shell: bash

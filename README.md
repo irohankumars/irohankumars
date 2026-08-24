@@ -1,23 +1,16 @@
-<table>
-  <tr>
-    <td width="52%" valign="top"><img src="generated/portrait.svg" width="460" alt="ASCII portrait of Rohan Kumar" /></td>
-    <td width="48%" valign="top">
-      <h2>ROHAN KUMAR</h2><p><code>software engineer</code></p><br />
-      <sub>I BUILD</sub><br />Full-stack products<br />SaaS and web platforms<br />Developer tools<br /><br />
-      <sub>I WORK WITH</sub><br />MERN · Python · APIs<br />MongoDB · Git · Linux<br /><br />
-      <sub>I EXPLORE</sub><br />Cybersecurity<br />Systems · Automation<br />VAPT · Networking<br /><br />
-      <sub>I ALSO</sub><br />Build products<br />Work with clients<br />Run Glora Studio
-    </td>
-  </tr>
-</table>
+<br />
+
+<p align="center">
+  <img src="generated/profile-reveal.svg" width="420" alt="Rohan Kumar — software engineer" />
+</p>
+
+<br />
 
 I take software from a rough idea to something people can actually use—designed, built, secured, and deployed.
 
-### Current work
+### Currently building
 
-**Building** — full-stack products, early SaaS ideas, and software for real clients.
-
-**Exploring** — cybersecurity, systems, network fundamentals, and useful automation.
+Full-stack products · early SaaS ideas · software for real clients
 
 ### GitHub activity
 
@@ -30,7 +23,7 @@ I take software from a rough idea to something people can actually use—designe
 
 These graphics are generated in this repository from GitHub's API—no external stats service, tracker, or contribution snake.
 
-### Working set
+### Tech stack
 
 `Languages` &nbsp; JavaScript · TypeScript · Python · C/C++<br />
 `Frontend` &nbsp;&nbsp; React · Vite · Tailwind CSS<br />
@@ -53,11 +46,13 @@ These graphics are generated in this repository from GitHub's API—no external 
 **[Wanderlust](https://github.com/irohankumars/Wanderlust)** — A travel discovery platform with modular REST APIs, authentication, and scalable listings. [Live site](https://wanderlust-72vc.onrender.com/listings).<br />
 `React · Node.js · Express · MongoDB · JWT`
 
-### What I'm building toward
+### Currently exploring
 
-Full-stack applications that can grow into products; developer tools and automation that save time; and a deeper working knowledge of cybersecurity. Through **Glora Studio**, some of that work becomes software for clients—not just experiments that stop at GitHub.
+Cybersecurity · systems · network fundamentals · useful automation
 
-### Contact
+Through **Glora Studio**, some of that work becomes software for clients—not just experiments that stop at GitHub.
+
+### Connect
 
 [Portfolio](https://rohankumars.dev/) · [LinkedIn](https://www.linkedin.com/in/rohankumars) · [GitHub](https://github.com/irohankumars) · [Email](mailto:kumarsrohan2@gmail.com)
 

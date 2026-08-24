@@ -45,7 +45,7 @@ def make_svg() -> str:
     char_width = font_size * 0.62
     parts = [
         '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 92" role="img" aria-labelledby="tag-title tag-desc">',
-        '<title id="tag-title">Rohan Kumar — software engineer and product builder</title>',
+        '<title id="tag-title">Rohan Kumar | software engineer and product builder</title>',
         '<desc id="tag-desc">A large green typewriter animation cycles through professional roles.</desc>',
         '<defs>',
     ]

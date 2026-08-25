@@ -50,13 +50,11 @@ jobs:
           for attempt in 1 2 3; do
             git fetch origin main
 
-            if ! git merge-base --is-ancestor origin/main HEAD; then
-              echo "Remote main advanced; rebasing generated asset commit onto origin/main."
-              if ! git rebase origin/main; then
-                echo "::error::Could not rebase generated assets onto origin/main. Resolve the conflicts manually."
-                git rebase --abort || true
-                exit 1
-              fi
+            echo "Rebasing generated asset commit onto the latest origin/main."
+            if ! git rebase origin/main; then
+              echo "::error::Could not rebase generated assets onto origin/main. Resolve the conflicts manually."
+              git rebase --abort || true
+              exit 1
             fi
 
             if git push origin HEAD:main; then

@@ -16,11 +16,11 @@ Full-stack products · early SaaS ideas · software for real clients
 
 ### GitHub activity
 
-<p>
-  <img src="generated/stats.svg" width="100%" alt="Contribution totals and twelve-week activity" />
-  <img src="generated/streak.svg" width="100%" alt="Current and longest contribution streak" />
-  <img src="generated/languages.svg" width="100%" alt="Top repository languages" />
-  <img src="generated/year.svg" width="100%" alt="Daily contribution activity for the current year" />
+<p align="center">
+  <img src="generated/stats.svg" width="680" alt="Contribution totals and twelve-week activity" /><br />
+  <img src="generated/streak.svg" width="680" alt="Current and longest contribution streak" /><br />
+  <img src="generated/languages.svg" width="680" alt="Top repository languages" /><br />
+  <img src="generated/year.svg" width="550" alt="Daily contribution activity for the current year" />
 </p>
 
 These graphics are generated in this repository from GitHub's API; no external stats service, tracker, or contribution snake.

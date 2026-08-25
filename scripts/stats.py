@@ -1,6 +1,13 @@
-"""Generate transparent, GitHub-green activity SVGs without third-party services."""
+"""Generate compact, responsive GitHub-green activity SVGs."""
 from __future__ import annotations
-import argparse, datetime as dt, html, json, os, urllib.error, urllib.request
+
+import argparse
+import datetime as dt
+import html
+import json
+import os
+import urllib.error
+import urllib.request
 import xml.etree.ElementTree as ET
 from collections import Counter
 from pathlib import Path
@@ -15,22 +22,32 @@ GREEN_1 = "#0e4429"
 GREEN_2 = "#006d32"
 GREEN_3 = "#26a641"
 GREEN_4 = "#39d353"
+FONT = "Consolas,DejaVu Sans Mono,monospace"
+
 
 def get_json(url: str, token: str, payload: dict | None = None):
     request = urllib.request.Request(url, data=json.dumps(payload).encode() if payload else None)
     request.add_header("Accept", "application/vnd.github+json")
     request.add_header("Authorization", f"Bearer {token}")
     request.add_header("User-Agent", "irohankumars-profile")
-    if payload: request.add_header("Content-Type", "application/json")
+    if payload:
+        request.add_header("Content-Type", "application/json")
     with urllib.request.urlopen(request, timeout=30) as response:
         return json.load(response)
 
+
 def calendar(token: str, username: str, year: int, end: dt.date) -> dict:
     query = """query($login:String!,$from:DateTime!,$to:DateTime!){user(login:$login){contributionsCollection(from:$from,to:$to){contributionCalendar{totalContributions weeks{contributionDays{date contributionCount}}}}}}"""
-    variables = {"login": username, "from": dt.datetime(year,1,1,tzinfo=dt.timezone.utc).isoformat(), "to": dt.datetime.combine(end,dt.time.max,tzinfo=dt.timezone.utc).isoformat()}
+    variables = {
+        "login": username,
+        "from": dt.datetime(year, 1, 1, tzinfo=dt.timezone.utc).isoformat(),
+        "to": dt.datetime.combine(end, dt.time.max, tzinfo=dt.timezone.utc).isoformat(),
+    }
     result = get_json("https://api.github.com/graphql", token, {"query": query, "variables": variables})
-    if result.get("errors"): raise RuntimeError(result["errors"][0]["message"])
+    if result.get("errors"):
+        raise RuntimeError(result["errors"][0]["message"])
     return result["data"]["user"]["contributionsCollection"]["contributionCalendar"]
+
 
 def activity(token: str, username: str) -> tuple[list[dict], int]:
     profile = get_json(f"https://api.github.com/users/{username}", token)
@@ -38,125 +55,242 @@ def activity(token: str, username: str) -> tuple[list[dict], int]:
     first = dt.date.fromisoformat(profile["created_at"][:10]).year
     days, total = [], 0
     for year in range(first, today.year + 1):
-        data = calendar(token, username, year, today if year == today.year else dt.date(year,12,31))
+        data = calendar(token, username, year, today if year == today.year else dt.date(year, 12, 31))
         total += data["totalContributions"]
         days += [day for week in data["weeks"] for day in week["contributionDays"]]
     return days, total
 
+
 def languages(token: str, username: str) -> Counter:
     totals, page = Counter(), 1
     while True:
-        repos = get_json(f"https://api.github.com/users/{username}/repos?type=owner&sort=pushed&per_page=100&page={page}", token)
+        repos = get_json(
+            f"https://api.github.com/users/{username}/repos?type=owner&sort=pushed&per_page=100&page={page}", token
+        )
         for repo in repos:
             if not repo["fork"] and not repo.get("archived"):
                 totals.update(get_json(repo["languages_url"], token))
-        if len(repos) < 100: return totals
+        if len(repos) < 100:
+            return totals
         page += 1
 
+
 def streaks(days: list[dict]) -> tuple[int, int]:
-    counts = {dt.date.fromisoformat(d["date"]): d["contributionCount"] for d in days}
+    counts = {dt.date.fromisoformat(day["date"]): day["contributionCount"] for day in days}
     today = dt.datetime.now(dt.timezone.utc).date()
-    cursor = today if counts.get(today,0) else today-dt.timedelta(days=1)
+    cursor = today if counts.get(today, 0) else today - dt.timedelta(days=1)
     current = 0
-    while counts.get(cursor,0): current, cursor = current+1, cursor-dt.timedelta(days=1)
+    while counts.get(cursor, 0):
+        current, cursor = current + 1, cursor - dt.timedelta(days=1)
     longest = run = 0
     for day in sorted(counts):
-        run = run+1 if counts[day] else 0; longest = max(longest,run)
-    return current,longest
+        run = run + 1 if counts[day] else 0
+        longest = max(longest, run)
+    return current, longest
 
-def text(x, y, value, size=14, color=PRIMARY, anchor="start") -> str:
-    return f'<text x="{x}" y="{y}" fill="{color}" text-anchor="{anchor}" font-family="Consolas,DejaVu Sans Mono,monospace" font-size="{size}">{html.escape(str(value))}</text>'
 
-def svg(title: str, body: list[str], height=180) -> str:
-    title = html.escape(title.upper())
-    return "\n".join([f'<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{title}" viewBox="0 0 760 {height}">',f'<text x="24" y="31" fill="{MUTED}" font-family="Consolas,DejaVu Sans Mono,monospace" font-size="12" letter-spacing="1.4">{title}</text>',*body,'</svg>'])+"\n"
+def text(x, y, value, size=18, color=PRIMARY, anchor="start", weight=None) -> str:
+    weight_attr = f' font-weight="{weight}"' if weight else ""
+    return (
+        f'<text x="{x}" y="{y}" fill="{color}" text-anchor="{anchor}" '
+        f'font-family="{FONT}" font-size="{size}"{weight_attr}>{html.escape(str(value))}</text>'
+    )
+
+
+def svg(title: str, body: list[str], width: int, height: int) -> str:
+    safe_title = html.escape(title.upper())
+    parts = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{safe_title}" viewBox="0 0 {width} {height}">',
+        text(24, 29, safe_title, 16, MUTED, weight="600"),
+        *body,
+        "</svg>",
+    ]
+    return "\n".join(parts) + "\n"
+
+
+def weekly_color(ratio: float, empty: bool = False) -> str:
+    if empty:
+        return EMPTY
+    if ratio < 0.34:
+        return GREEN_1
+    if ratio < 0.72:
+        return GREEN_3
+    return GREEN_4
+
+
+def write_stats(total, recent, ratios: list[float], empty: list[bool] | None = None) -> None:
+    empty = empty or [False] * len(ratios)
+    body = [
+        text(32, 92, total, 54, PRIMARY, weight="600"),
+        text(34, 121, "lifetime public", 18, SECONDARY),
+        text(34, 143, "contributions", 18, SECONDARY),
+        text(368, 92, recent, 54, GREEN_4, weight="600"),
+        text(370, 121, "last 7 days", 18, SECONDARY),
+    ]
+    base_y, max_height = 230, 66
+    for index, ratio in enumerate(ratios):
+        height = 3 if empty[index] else max(7, round(max_height * ratio))
+        body.append(
+            f'<rect x="{27 + index * 54}" y="{base_y - height}" width="36" height="{height}" '
+            f'rx="3" fill="{weekly_color(ratio, empty[index])}"/>'
+        )
+    (OUT / "stats.svg").write_bytes(svg("Contribution record / 12-week pulse", body, 680, 245).encode("utf-8"))
+
+
+def write_streak(current, longest) -> None:
+    body = [
+        text(34, 96, current, 56, GREEN_4, weight="600"),
+        text(36, 128, "current days", 19, SECONDARY),
+        '<line x1="36" y1="145" x2="184" y2="145" stroke="#26a641" stroke-width="3"/>',
+        text(370, 96, longest, 56, GREEN_4, weight="600"),
+        text(372, 128, "longest days", 19, SECONDARY),
+        '<line x1="372" y1="145" x2="520" y2="145" stroke="#26a641" stroke-width="3"/>',
+    ]
+    (OUT / "streak.svg").write_bytes(svg("Working rhythm", body, 680, 165).encode("utf-8"))
+
+
+def write_languages(items: list[tuple[str, float]]) -> None:
+    colors = (GREEN_3, GREEN_2, GREEN_1, GREEN_1, GREEN_1, GREEN_1)
+    body = []
+    for index, (name, percent) in enumerate(items[:6]):
+        y = 67 + index * 30
+        body.extend(
+            [
+                text(24, y, name, 18),
+                text(276, y, f"{percent:4.1f}%", 17, SECONDARY, "end"),
+                f'<rect x="300" y="{y - 14}" width="{max(5, round(340 * percent / 100))}" '
+                f'height="13" rx="3" fill="{colors[index]}"/>',
+            ]
+        )
+    (OUT / "languages.svg").write_bytes(svg("Repository language mix", body, 680, 240).encode("utf-8"))
+
+
+def write_year(cells: list[tuple[int, str, bool]], footer: str) -> None:
+    weeks = max(1, (len(cells) + 6) // 7)
+    width = max(360, 40 + weeks * 15)
+    body = []
+    for index, (weekday, color, is_empty) in enumerate(cells):
+        week = index // 7
+        opacity = ' fill-opacity="0.45"' if is_empty else ""
+        body.append(
+            f'<rect x="{22 + week * 15}" y="{48 + weekday * 15}" width="11" height="11" '
+            f'rx="2" fill="{color}"{opacity}/>'
+        )
+    body.append(text(24, 178, footer, 18, SECONDARY))
+    (OUT / "year.svg").write_bytes(svg("Year / daily trace", body, width, 192).encode("utf-8"))
+
 
 def placeholders() -> None:
-    body=[text(24,82,"activity will appear after the first workflow run",16),text(24,112,"run locally with GITHUB_TOKEN to populate",12,SECONDARY)]
-    for name,title in (("stats.svg","GitHub activity"),("streak.svg","Streaks"),("languages.svg","Languages"),("year.svg","Year in commits")):
-        (OUT/name).write_text(svg(title,body),encoding="utf-8")
+    body = [
+        text(24, 82, "activity will appear after the first workflow run", 18),
+        text(24, 112, "run locally with GITHUB_TOKEN to populate", 16, SECONDARY),
+    ]
+    for name, title in (
+        ("stats.svg", "GitHub activity"),
+        ("streak.svg", "Streaks"),
+        ("languages.svg", "Languages"),
+        ("year.svg", "Year in commits"),
+    ):
+        (OUT / name).write_bytes(svg(title, body, 680, 150).encode("utf-8"))
+
 
 def render(days: list[dict], total: int, langs: Counter) -> None:
-    today=dt.datetime.now(dt.timezone.utc).date()
-    recent=sum(d["contributionCount"] for d in days if dt.date.fromisoformat(d["date"])>today-dt.timedelta(days=7))
-    weeks=[]
-    for offset in range(11,-1,-1):
-        end=today-dt.timedelta(days=offset*7); start=end-dt.timedelta(days=6)
-        weeks.append(sum(d["contributionCount"] for d in days if start<=dt.date.fromisoformat(d["date"])<=end))
-    scale=max(weeks) or 1
-    def weekly_color(value: int) -> str:
-        ratio=value/scale
-        return EMPTY if value==0 else GREEN_1 if ratio<.34 else GREEN_3 if ratio<.72 else GREEN_4
-    bars=[f'<rect x="{390+i*27}" y="{135-round(76*v/scale)}" width="11" height="{max(2,round(76*v/scale))}" rx="1" fill="{weekly_color(v)}"/>' for i,v in enumerate(weeks)]
-    body=[text(24,85,f"{total:,}",34),text(25,110,"lifetime public contributions",12,SECONDARY),text(250,85,recent,34,GREEN_4),text(251,110,"last 7 days",12,SECONDARY),*bars]
-    (OUT/"stats.svg").write_text(svg("Contribution record / 12-week pulse",body),encoding="utf-8")
-    current,longest=streaks(days)
-    body=[text(24,92,current,40,GREEN_4),text(25,119,"current days",12,SECONDARY),'<line x1="24" y1="132" x2="128" y2="132" stroke="#26a641" stroke-width="2"/>',text(280,92,longest,40,GREEN_4),text(281,119,"longest days",12,SECONDARY),'<line x1="280" y1="132" x2="384" y2="132" stroke="#26a641" stroke-width="2"/>']
-    (OUT/"streak.svg").write_text(svg("Working rhythm",body),encoding="utf-8")
-    total_bytes=sum(langs.values()) or 1; body=[]
-    language_colors=(GREEN_3,GREEN_2,GREEN_1,GREEN_1,GREEN_1,GREEN_1)
-    for i,(name,amount) in enumerate(langs.most_common(6)):
-        y=67+i*20; percent=amount/total_bytes*100
-        body += [text(24,y,name,13),text(190,y,f"{percent:4.1f}%",12,SECONDARY,"end"),f'<rect x="215" y="{y-10}" width="{round(500*percent/100)}" height="7" rx="1" fill="{language_colors[i]}"/>']
-    (OUT/"languages.svg").write_text(svg("Repository language mix",body,210),encoding="utf-8")
-    current_year=[d for d in days if d["date"].startswith(str(today.year))]; counts={d["date"]:d["contributionCount"] for d in current_year}; first=dt.date(today.year,1,1); cells=[]
-    for offset in range((today-first).days+1):
-        day=first+dt.timedelta(days=offset); count=counts.get(day.isoformat(),0); x=25+(day-first).days//7*13; y=61+day.weekday()*13
-        shade=EMPTY if count==0 else GREEN_1 if count<2 else GREEN_2 if count<4 else GREEN_3 if count<7 else GREEN_4
-        opacity=' fill-opacity="0.45"' if count==0 else ""
-        cells.append(f'<rect x="{x}" y="{y}" width="9" height="9" rx="1" fill="{shade}"{opacity}/>')
-    cells.append(text(25,171,f'{sum(d["contributionCount"] for d in current_year):,} contributions in {today.year}',12,SECONDARY))
-    (OUT/"year.svg").write_text(svg("Year / daily trace",cells,190),encoding="utf-8")
+    today = dt.datetime.now(dt.timezone.utc).date()
+    recent = sum(
+        day["contributionCount"]
+        for day in days
+        if dt.date.fromisoformat(day["date"]) > today - dt.timedelta(days=7)
+    )
+    weeks = []
+    for offset in range(11, -1, -1):
+        end = today - dt.timedelta(days=offset * 7)
+        start = end - dt.timedelta(days=6)
+        weeks.append(
+            sum(
+                day["contributionCount"]
+                for day in days
+                if start <= dt.date.fromisoformat(day["date"]) <= end
+            )
+        )
+    scale = max(weeks) or 1
+    write_stats(f"{total:,}", recent, [value / scale for value in weeks], [value == 0 for value in weeks])
+
+    current, longest = streaks(days)
+    write_streak(current, longest)
+
+    total_bytes = sum(langs.values()) or 1
+    write_languages([(name, amount / total_bytes * 100) for name, amount in langs.most_common(6)])
+
+    current_year = [day for day in days if day["date"].startswith(str(today.year))]
+    cells = []
+    for day in current_year:
+        count = day["contributionCount"]
+        color = EMPTY if count == 0 else GREEN_1 if count < 2 else GREEN_2 if count < 4 else GREEN_3 if count < 7 else GREEN_4
+        cells.append((dt.date.fromisoformat(day["date"]).weekday(), color, count == 0))
+    year_total = sum(day["contributionCount"] for day in current_year)
+    write_year(cells, f"{year_total:,} contributions in {today.year}")
+
 
 def restyle_existing() -> None:
-    """Apply the current visual system without recalculating already-generated data."""
-    ET.register_namespace("", "http://www.w3.org/2000/svg")
-    namespace="{http://www.w3.org/2000/svg}"
-    for name in ("stats.svg","streak.svg","languages.svg","year.svg"):
-        path=OUT/name; tree=ET.parse(path); root=tree.getroot()
-        for child in list(root):
-            if child.tag==namespace+"rect" and child.get("width")=="100%" and child.get("height")=="100%":
-                root.remove(child)
-        texts=root.findall(namespace+"text")
-        for item in texts:
-            if item.get("y")=="31": item.set("fill",MUTED)
-            elif item.get("font-size") in ("12","13"): item.set("fill",SECONDARY if item.get("font-size")=="12" else PRIMARY)
-            else: item.set("fill",PRIMARY)
-        rects=root.findall(namespace+"rect")
-        if name=="stats.svg":
-            numbers=[item for item in texts if item.get("font-size")=="34"]
-            if len(numbers)>1: numbers[1].set("fill",GREEN_4)
-            bars=[item for item in rects if int(float(item.get("x","0")))>=390]
-            scale=max((float(item.get("height","0")) for item in bars),default=1)
-            for bar in bars:
-                height=float(bar.get("height","0")); ratio=height/scale
-                bar.set("fill",EMPTY if height<=2 else GREEN_1 if ratio<.34 else GREEN_3 if ratio<.72 else GREEN_4)
-                bar.set("rx","1")
-        elif name=="streak.svg":
-            for item in texts:
-                if item.get("font-size")=="40": item.set("fill",GREEN_4)
-            if not root.findall(namespace+"line"):
-                for x in (24,280):
-                    ET.SubElement(root,namespace+"line",{"x1":str(x),"y1":"132","x2":str(x+104),"y2":"132","stroke":GREEN_3,"stroke-width":"2"})
-        elif name=="languages.svg":
-            colors=(GREEN_3,GREEN_2,GREEN_1,GREEN_1,GREEN_1,GREEN_1)
-            for index,bar in enumerate(rects):
-                bar.set("fill",colors[min(index,len(colors)-1)]); bar.set("rx","1")
-        else:
-            mapping={"#e8e8e8":EMPTY,"#a5a5a5":GREEN_1,"#555":GREEN_2,"#161616":GREEN_4}
-            for cell in rects:
-                old=cell.get("fill",""); cell.set("fill",mapping.get(old,old))
-                if old=="#e8e8e8": cell.set("fill-opacity","0.45")
-        serialized=ET.tostring(root,encoding="unicode").rstrip()+"\n"
-        path.write_bytes(serialized.encode("utf-8"))
-    print("Restyled existing activity graphics without changing their data.")
+    """Reflow current SVG data without recalculating values from GitHub."""
+    namespace = {"svg": "http://www.w3.org/2000/svg"}
+
+    stats_root = ET.parse(OUT / "stats.svg").getroot()
+    stats_text = [node.text or "" for node in stats_root.findall("svg:text", namespace)]
+    stats_rects = stats_root.findall("svg:rect", namespace)
+    heights = [float(node.get("height", "0")) for node in stats_rects]
+    scale = max(heights) or 1
+    write_stats(stats_text[1], stats_text[3], [height / scale for height in heights], [height <= 3 for height in heights])
+
+    streak_root = ET.parse(OUT / "streak.svg").getroot()
+    streak_text = [node.text or "" for node in streak_root.findall("svg:text", namespace)]
+    write_streak(streak_text[1], streak_text[3])
+
+    language_root = ET.parse(OUT / "languages.svg").getroot()
+    language_text = [node.text or "" for node in language_root.findall("svg:text", namespace)][1:]
+    items = []
+    for index in range(0, len(language_text), 2):
+        items.append((language_text[index], float(language_text[index + 1].strip().rstrip("%"))))
+    write_languages(items)
+
+    year_root = ET.parse(OUT / "year.svg").getroot()
+    year_rects = year_root.findall("svg:rect", namespace)
+    y_values = sorted({float(node.get("y", "0")) for node in year_rects})
+    y_to_weekday = {value: index for index, value in enumerate(y_values)}
+    cells = [
+        (
+            y_to_weekday[float(node.get("y", "0"))],
+            node.get("fill", EMPTY),
+            node.get("fill") == EMPTY or node.get("fill-opacity") is not None,
+        )
+        for node in year_rects
+    ]
+    footer = [node.text or "" for node in year_root.findall("svg:text", namespace)][-1]
+    write_year(cells, footer)
+    print("Reflowed existing activity graphics without changing their displayed data.")
+
 
 def main() -> None:
-    parser=argparse.ArgumentParser(); parser.add_argument("--username",default=os.getenv("GITHUB_REPOSITORY_OWNER","irohankumars")); parser.add_argument("--token",default=os.getenv("GITHUB_TOKEN")); parser.add_argument("--restyle-existing",action="store_true"); args=parser.parse_args(); OUT.mkdir(parents=True,exist_ok=True)
-    if args.restyle_existing: restyle_existing(); return
-    if not args.token: print("GITHUB_TOKEN not set; writing first-run placeholders."); placeholders(); return
-    try: days,total=activity(args.token,args.username); render(days,total,languages(args.token,args.username))
-    except (urllib.error.HTTPError,urllib.error.URLError,RuntimeError,KeyError) as error: raise SystemExit(f"GitHub data generation failed: {error}") from error
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--username", default=os.getenv("GITHUB_REPOSITORY_OWNER", "irohankumars"))
+    parser.add_argument("--token", default=os.getenv("GITHUB_TOKEN"))
+    parser.add_argument("--restyle-existing", action="store_true")
+    args = parser.parse_args()
+    OUT.mkdir(parents=True, exist_ok=True)
+    if args.restyle_existing:
+        restyle_existing()
+        return
+    if not args.token:
+        print("GITHUB_TOKEN not set; writing first-run placeholders.")
+        placeholders()
+        return
+    try:
+        days, total = activity(args.token, args.username)
+        render(days, total, languages(args.token, args.username))
+    except (urllib.error.HTTPError, urllib.error.URLError, RuntimeError, KeyError) as error:
+        raise SystemExit(f"GitHub data generation failed: {error}") from error
     print(f"Updated activity graphics for {args.username}.")
 
-if __name__ == "__main__": main()
+
+if __name__ == "__main__":
+    main()

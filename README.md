@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <img src="generated/profile-tag.svg" width="680" alt="Software engineer · Full-stack developer · Product builder · Security enthusiast" />
+  <img src="generated/profile-tag.svg" width="560" alt="Software Engineer" />
 </p>
 
 I take software from a rough idea to something people can actually use: designed, built, secured, and deployed.
@@ -18,8 +18,8 @@ Full-stack products · early SaaS ideas · software for real clients
 
 <p>
   <img src="generated/stats.svg" width="100%" alt="Contribution totals and twelve-week activity" />
-  <img src="generated/streak.svg" width="49%" alt="Current and longest contribution streak" />
-  <img src="generated/languages.svg" width="49%" alt="Top repository languages" />
+  <img src="generated/streak.svg" width="100%" alt="Current and longest contribution streak" />
+  <img src="generated/languages.svg" width="100%" alt="Top repository languages" />
   <img src="generated/year.svg" width="100%" alt="Daily contribution activity for the current year" />
 </p>
 

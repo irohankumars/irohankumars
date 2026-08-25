@@ -2,6 +2,8 @@
 <text x="24" y="31" fill="#6e7681" font-family="Consolas,DejaVu Sans Mono,monospace" font-size="12" letter-spacing="1.4">WORKING RHYTHM</text>
 <text x="24" y="92" fill="#39d353" text-anchor="start" font-family="Consolas,DejaVu Sans Mono,monospace" font-size="40">1</text>
 <text x="25" y="119" fill="#8b949e" text-anchor="start" font-family="Consolas,DejaVu Sans Mono,monospace" font-size="12">current days</text>
+<line x1="24" y1="132" x2="128" y2="132" stroke="#26a641" stroke-width="2"/>
 <text x="280" y="92" fill="#39d353" text-anchor="start" font-family="Consolas,DejaVu Sans Mono,monospace" font-size="40">22</text>
 <text x="281" y="119" fill="#8b949e" text-anchor="start" font-family="Consolas,DejaVu Sans Mono,monospace" font-size="12">longest days</text>
-<line x1="24" y1="132" x2="128" y2="132" stroke="#26a641" stroke-width="2" /><line x1="280" y1="132" x2="384" y2="132" stroke="#26a641" stroke-width="2" /></svg>
+<line x1="280" y1="132" x2="384" y2="132" stroke="#26a641" stroke-width="2"/>
+</svg>

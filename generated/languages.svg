@@ -8,10 +8,10 @@
 <rect x="300" y="83" width="134" height="13" rx="3" fill="#006d32"/>
 <text x="24" y="127" fill="#f0f6fc" text-anchor="start" font-family="Consolas,DejaVu Sans Mono,monospace" font-size="18">EJS</text>
 <text x="276" y="127" fill="#8b949e" text-anchor="end" font-family="Consolas,DejaVu Sans Mono,monospace" font-size="17"> 7.2%</text>
-<rect x="300" y="113" width="24" height="13" rx="3" fill="#0e4429"/>
+<rect x="300" y="113" width="25" height="13" rx="3" fill="#0e4429"/>
 <text x="24" y="157" fill="#f0f6fc" text-anchor="start" font-family="Consolas,DejaVu Sans Mono,monospace" font-size="18">CSS</text>
 <text x="276" y="157" fill="#8b949e" text-anchor="end" font-family="Consolas,DejaVu Sans Mono,monospace" font-size="17"> 6.6%</text>
-<rect x="300" y="143" width="22" height="13" rx="3" fill="#0e4429"/>
+<rect x="300" y="143" width="23" height="13" rx="3" fill="#0e4429"/>
 <text x="24" y="187" fill="#f0f6fc" text-anchor="start" font-family="Consolas,DejaVu Sans Mono,monospace" font-size="18">Java</text>
 <text x="276" y="187" fill="#8b949e" text-anchor="end" font-family="Consolas,DejaVu Sans Mono,monospace" font-size="17"> 4.7%</text>
 <rect x="300" y="173" width="16" height="13" rx="3" fill="#0e4429"/>

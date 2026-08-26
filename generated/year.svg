@@ -236,6 +236,7 @@
 <rect x="517" y="123" width="11" height="11" rx="2" fill="#21262d" fill-opacity="0.45"/>
 <rect x="517" y="138" width="11" height="11" rx="2" fill="#21262d" fill-opacity="0.45"/>
 <rect x="517" y="48" width="11" height="11" rx="2" fill="#39d353"/>
-<rect x="517" y="63" width="11" height="11" rx="2" fill="#21262d" fill-opacity="0.45"/>
-<text x="24" y="178" fill="#8b949e" text-anchor="start" font-family="Consolas,DejaVu Sans Mono,monospace" font-size="18">435 contributions in 2026</text>
+<rect x="517" y="63" width="11" height="11" rx="2" fill="#39d353"/>
+<rect x="517" y="78" width="11" height="11" rx="2" fill="#21262d" fill-opacity="0.45"/>
+<text x="24" y="178" fill="#8b949e" text-anchor="start" font-family="Consolas,DejaVu Sans Mono,monospace" font-size="18">449 contributions in 2026</text>
 </svg>

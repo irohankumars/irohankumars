@@ -5,16 +5,16 @@
 <text x="34" y="143" fill="#8b949e" text-anchor="start" font-family="Consolas,DejaVu Sans Mono,monospace" font-size="18">contributions</text>
 <text x="368" y="92" fill="#39d353" text-anchor="start" font-family="Consolas,DejaVu Sans Mono,monospace" font-size="54" font-weight="600">21</text>
 <text x="370" y="121" fill="#8b949e" text-anchor="start" font-family="Consolas,DejaVu Sans Mono,monospace" font-size="18">last 7 days</text>
-<rect x="27" y="217" width="36" height="13" rx="3" fill="#0e4429"/>
+<rect x="27" y="221" width="36" height="9" rx="3" fill="#0e4429"/>
 <rect x="81" y="227" width="36" height="3" rx="3" fill="#21262d"/>
-<rect x="135" y="209" width="36" height="21" rx="3" fill="#0e4429"/>
-<rect x="189" y="219" width="36" height="11" rx="3" fill="#0e4429"/>
+<rect x="135" y="215" width="36" height="15" rx="3" fill="#0e4429"/>
+<rect x="189" y="222" width="36" height="8" rx="3" fill="#0e4429"/>
 <rect x="243" y="223" width="36" height="7" rx="3" fill="#0e4429"/>
-<rect x="297" y="219" width="36" height="11" rx="3" fill="#0e4429"/>
-<rect x="351" y="185" width="36" height="45" rx="3" fill="#26a641"/>
-<rect x="405" y="209" width="36" height="21" rx="3" fill="#0e4429"/>
-<rect x="459" y="209" width="36" height="21" rx="3" fill="#0e4429"/>
-<rect x="513" y="167" width="36" height="63" rx="3" fill="#39d353"/>
-<rect x="567" y="164" width="36" height="66" rx="3" fill="#39d353"/>
-<rect x="621" y="175" width="36" height="55" rx="3" fill="#39d353"/>
+<rect x="297" y="217" width="36" height="13" rx="3" fill="#0e4429"/>
+<rect x="351" y="194" width="36" height="36" rx="3" fill="#26a641"/>
+<rect x="405" y="223" width="36" height="7" rx="3" fill="#0e4429"/>
+<rect x="459" y="207" width="36" height="23" rx="3" fill="#26a641"/>
+<rect x="513" y="164" width="36" height="66" rx="3" fill="#39d353"/>
+<rect x="567" y="211" width="36" height="19" rx="3" fill="#0e4429"/>
+<rect x="621" y="190" width="36" height="40" rx="3" fill="#26a641"/>
 </svg>

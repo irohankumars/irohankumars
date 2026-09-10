@@ -3,18 +3,18 @@
 <text x="32" y="92" fill="#f0f6fc" text-anchor="start" font-family="Consolas,DejaVu Sans Mono,monospace" font-size="54" font-weight="600">594</text>
 <text x="34" y="121" fill="#8b949e" text-anchor="start" font-family="Consolas,DejaVu Sans Mono,monospace" font-size="18">lifetime public</text>
 <text x="34" y="143" fill="#8b949e" text-anchor="start" font-family="Consolas,DejaVu Sans Mono,monospace" font-size="18">contributions</text>
-<text x="368" y="92" fill="#39d353" text-anchor="start" font-family="Consolas,DejaVu Sans Mono,monospace" font-size="54" font-weight="600">44</text>
+<text x="368" y="92" fill="#39d353" text-anchor="start" font-family="Consolas,DejaVu Sans Mono,monospace" font-size="54" font-weight="600">31</text>
 <text x="370" y="121" fill="#8b949e" text-anchor="start" font-family="Consolas,DejaVu Sans Mono,monospace" font-size="18">last 7 days</text>
-<rect x="27" y="218" width="36" height="12" rx="3" fill="#0e4429"/>
+<rect x="27" y="217" width="36" height="13" rx="3" fill="#0e4429"/>
 <rect x="81" y="223" width="36" height="7" rx="3" fill="#0e4429"/>
 <rect x="135" y="223" width="36" height="7" rx="3" fill="#0e4429"/>
-<rect x="189" y="223" width="36" height="7" rx="3" fill="#0e4429"/>
-<rect x="243" y="204" width="36" height="26" rx="3" fill="#26a641"/>
-<rect x="297" y="218" width="36" height="12" rx="3" fill="#0e4429"/>
-<rect x="351" y="218" width="36" height="12" rx="3" fill="#0e4429"/>
-<rect x="405" y="194" width="36" height="36" rx="3" fill="#26a641"/>
-<rect x="459" y="192" width="36" height="38" rx="3" fill="#26a641"/>
-<rect x="513" y="198" width="36" height="32" rx="3" fill="#26a641"/>
-<rect x="567" y="188" width="36" height="42" rx="3" fill="#26a641"/>
-<rect x="621" y="164" width="36" height="66" rx="3" fill="#39d353"/>
+<rect x="189" y="219" width="36" height="11" rx="3" fill="#0e4429"/>
+<rect x="243" y="199" width="36" height="31" rx="3" fill="#26a641"/>
+<rect x="297" y="223" width="36" height="7" rx="3" fill="#0e4429"/>
+<rect x="351" y="211" width="36" height="19" rx="3" fill="#0e4429"/>
+<rect x="405" y="174" width="36" height="56" rx="3" fill="#39d353"/>
+<rect x="459" y="214" width="36" height="16" rx="3" fill="#0e4429"/>
+<rect x="513" y="196" width="36" height="34" rx="3" fill="#26a641"/>
+<rect x="567" y="164" width="36" height="66" rx="3" fill="#39d353"/>
+<rect x="621" y="180" width="36" height="50" rx="3" fill="#39d353"/>
 </svg>

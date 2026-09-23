@@ -7,14 +7,14 @@
 <text x="370" y="121" fill="#8b949e" text-anchor="start" font-family="Consolas,DejaVu Sans Mono,monospace" font-size="18">last 7 days</text>
 <rect x="27" y="223" width="36" height="7" rx="3" fill="#0e4429"/>
 <rect x="81" y="223" width="36" height="7" rx="3" fill="#0e4429"/>
-<rect x="135" y="213" width="36" height="17" rx="3" fill="#0e4429"/>
-<rect x="189" y="221" width="36" height="9" rx="3" fill="#0e4429"/>
-<rect x="243" y="217" width="36" height="13" rx="3" fill="#0e4429"/>
-<rect x="297" y="204" width="36" height="26" rx="3" fill="#26a641"/>
-<rect x="351" y="210" width="36" height="20" rx="3" fill="#0e4429"/>
-<rect x="405" y="197" width="36" height="33" rx="3" fill="#26a641"/>
-<rect x="459" y="214" width="36" height="16" rx="3" fill="#0e4429"/>
+<rect x="135" y="204" width="36" height="26" rx="3" fill="#26a641"/>
+<rect x="189" y="218" width="36" height="12" rx="3" fill="#0e4429"/>
+<rect x="243" y="218" width="36" height="12" rx="3" fill="#0e4429"/>
+<rect x="297" y="194" width="36" height="36" rx="3" fill="#26a641"/>
+<rect x="351" y="192" width="36" height="38" rx="3" fill="#26a641"/>
+<rect x="405" y="198" width="36" height="32" rx="3" fill="#26a641"/>
+<rect x="459" y="188" width="36" height="42" rx="3" fill="#26a641"/>
 <rect x="513" y="164" width="36" height="66" rx="3" fill="#39d353"/>
 <rect x="567" y="223" width="36" height="7" rx="3" fill="#0e4429"/>
-<rect x="621" y="220" width="36" height="10" rx="3" fill="#0e4429"/>
+<rect x="621" y="216" width="36" height="14" rx="3" fill="#0e4429"/>
 </svg>
